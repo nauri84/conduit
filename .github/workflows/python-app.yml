@@ -10,7 +10,7 @@ on:
 
 jobs:
   conduit-selenium-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v2
@@ -21,10 +21,10 @@ jobs:
       run: sleep 60s
       shell: bash
 
-    - name: Set up Python. Version 3.10.4
+    - name: Set up Python. Version 3.9.5
       uses: actions/setup-python@v2
       with:
-        python-version: 3.10.4
+        python-version: 3.9.5
         
     - name: Install Chrome
       run: |
