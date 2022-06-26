@@ -116,7 +116,7 @@ class TestConduit(object):
         comment_field = self.browser.find_element_by_xpath('//textarea[@placeholder="Write a comment..."]')
         post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
         comment_list = self.browser.find_elements_by_xpath('//p[@class="card-text"]')
-        with open('comments.csv', 'r', encoding='UTF-8') as file:
+        with open('test_conduit/comments.csv', 'r', encoding='UTF-8') as file:
             csv_reader = csv.reader(file, delimiter=';')
             for row in csv_reader:
                 comment_field.send_keys(row)
