@@ -177,10 +177,10 @@ class TestConduit(object):
 
     def test_save_data_to_file(self):
         tags = self.browser.find_elements_by_xpath('//a[@class="tag-pill tag-default"]')
-        with open('tags.txt', 'w', encoding='UTF-8') as f:
+        with open('test_conduit/tags.txt', 'w', encoding='UTF-8') as f:
             for tag in tags:
                 f.write(tag.text + ', ')
-        with open('tags.txt', 'r', encoding='UTF-8') as f:
+        with open('test_conduit/tags.txt', 'r', encoding='UTF-8') as f:
             txt_tags = f.read().split(', ')
             for i, tag in enumerate(tags):
                 assert tag.text == txt_tags[i]
