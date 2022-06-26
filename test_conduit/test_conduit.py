@@ -7,14 +7,17 @@ from sample_article import article
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 import csv
 
 
 class TestConduit(object):
     def setup(self):
+        browser_options = Options()
+        browser_options.headless = True
         # options = webdriver.ChromeOptions()
         # options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())
+        self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         self.browser.get("http://localhost:1667/")
 
     def teardown(self):
