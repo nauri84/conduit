@@ -15,8 +15,6 @@ class TestConduit(object):
     def setup(self):
         browser_options = Options()
         browser_options.headless = True
-        # options = webdriver.ChromeOptions()
-        # options.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         self.browser.get("http://localhost:1667/")
 
