@@ -53,9 +53,9 @@ class TestConduit(object):
         password_input.clear()
         email_input.send_keys(sample_user["email"])
         password_input.send_keys(sample_user["password"])
-        time.sleep(2)
+        time.sleep(3)
         login_btn.click()
-        time.sleep(2)
+        time.sleep(4)
         profile = self.browser.find_elements_by_css_selector('a[class="nav-link"]')[2]
         assert profile.text == sample_user["name"]
 
