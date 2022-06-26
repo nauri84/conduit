@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 import csv
 
-
+#chrome
 class TestConduit(object):
     def setup(self):
         browser_options = Options()
