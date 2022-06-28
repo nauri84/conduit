@@ -26,3 +26,21 @@ def new_article(browser, title_input, about_input, main_input, tag_input):
     sample_article_tag.send_keys(tag_input)
     publish_article_btn = browser.find_element_by_xpath('//button[@class="btn btn-lg pull-xs-right btn-primary"]')
     publish_article_btn.click()
+
+def registration(browser, reg_name, reg_email, reg_pw):
+    signup_btn = browser.find_element_by_xpath('//a[@href="#/register"]')
+    signup_btn.click()
+    username_input = browser.find_element_by_xpath('//input[@placeholder="Username"]')
+    email_input = browser.find_element_by_xpath('//input[@placeholder="Email"]')
+    password_input = browser.find_element_by_xpath('//input[@type="password"]')
+    signup_btn = browser.find_element_by_css_selector('button[class="btn btn-lg btn-primary pull-xs-right"]')
+    username_input.send_keys(reg_name)
+    email_input.send_keys(reg_email)
+    password_input.send_keys(reg_pw)
+    time.sleep(1)
+    signup_btn.click()
+    # time.sleep(1)
+    # reg_fail = browser.find_element_by_xpath('//div[@class="swal-title"]')
+    # reg_invalid_email = browser.find_element_by_xpath('//div[@class="swal-text"]')
+    # assert reg_fail.text == "Registration failed!"
+    # assert reg_invalid_email.text == "Email must be a valid email."
