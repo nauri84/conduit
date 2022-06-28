@@ -39,8 +39,6 @@ def registration(browser, reg_name, reg_email, reg_pw):
     password_input.send_keys(reg_pw)
     time.sleep(1)
     signup_btn.click()
-    # time.sleep(1)
-    # reg_fail = browser.find_element_by_xpath('//div[@class="swal-title"]')
-    # reg_invalid_email = browser.find_element_by_xpath('//div[@class="swal-text"]')
-    # assert reg_fail.text == "Registration failed!"
-    # assert reg_invalid_email.text == "Email must be a valid email."
+    time.sleep(2)
+    logout_btn = browser.find_element_by_xpath('//a[@active-class="active"]')
+    logout_btn.click()

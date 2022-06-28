@@ -10,7 +10,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 import csv
 
-#chrome
+
+# chrome
 class TestConduit(object):
     def setup(self):
         browser_options = Options()
@@ -24,8 +25,6 @@ class TestConduit(object):
     # TC001 - Regisztráció - negatív ág
 
     def test_reg(self):
-        # creating future user
-        registration(self.browser, sample_user["name"], sample_user["email"], sample_user["password"])
         signup_btn = self.browser.find_element_by_xpath('//a[@href="#/register"]')
         signup_btn.click()
         username_input = self.browser.find_element_by_xpath('//input[@placeholder="Username"]')
@@ -43,11 +42,12 @@ class TestConduit(object):
         assert reg_fail.text == "Registration failed!"
         assert reg_invalid_email.text == "Email must be a valid email."
 
-
-
     # TC002 - Bejelentkezés - pozitív ág
 
     def test_logging_in(self):
+        # creating future user and logging out
+        registration(self.browser, sample_user["name"], sample_user["email"], sample_user["password"])
+        # starting login test
         signin_btn = self.browser.find_element_by_xpath('//a[@href="#/login"]')
         signin_btn.click()
         email_input = self.browser.find_element_by_xpath('//input[@type="text"]')
