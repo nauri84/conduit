@@ -53,11 +53,11 @@ class TestConduit(object):
         password_input.clear()
         email_input.send_keys(sample_user["email"])
         password_input.send_keys(sample_user["password"])
-        time.sleep(3)
+        time.sleep(1)
         login_btn.click()
-        time.sleep(4)
-        profile = self.browser.find_elements_by_css_selector('a[class="nav-link"]')[2]
-        assert profile.text == sample_user["name"]
+        time.sleep(2)
+        nav_menu = self.browser.find_element_by_xpath('//nav')
+        assert sample_user["name"] in nav_menu.text
 
     # TC003 - Cookie kezelési tájékoztató
 
