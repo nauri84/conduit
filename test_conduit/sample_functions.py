@@ -40,5 +40,8 @@ def registration(browser, reg_name, reg_email, reg_pw):
     time.sleep(1)
     signup_btn.click()
     time.sleep(2)
+    confirm_btn = browser.find_element_by_css_selector('button[class="swal-button swal-button--confirm"]')
+    confirm_btn.click()
+    time.sleep(1)
     logout_btn = browser.find_element_by_xpath('//a[@active-class="active"]')
     logout_btn.click()
