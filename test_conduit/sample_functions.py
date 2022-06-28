@@ -39,7 +39,7 @@ def registration(browser, reg_name, reg_email, reg_pw):
     password_input.send_keys(reg_pw)
     time.sleep(1)
     signup_btn.click()
-    time.sleep(2)
+    time.sleep(4)
     confirm_btn = browser.find_element_by_css_selector('button[class="swal-button swal-button--confirm"]')
     confirm_btn.click()
     time.sleep(1)
