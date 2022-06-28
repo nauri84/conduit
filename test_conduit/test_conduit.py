@@ -15,7 +15,7 @@ import csv
 class TestConduit(object):
     def setup(self):
         browser_options = Options()
-        browser_options.headless = True
+        browser_options.headless = True  # a github actions-ben történő futtatáshoz szükséges
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         self.browser.get("http://localhost:1667/")
 
@@ -45,9 +45,9 @@ class TestConduit(object):
     # TC002 - Bejelentkezés - pozitív ág
 
     def test_logging_in(self):
-        # creating future user and logging out
+        # pozitív tesztesethez felhasználó regisztrálása és kilépés
         registration(self.browser, sample_user["name"], sample_user["email"], sample_user["password"])
-        # starting login test
+        # regisztrált felhasználó beléptetése
         signin_btn = self.browser.find_element_by_xpath('//a[@href="#/login"]')
         signin_btn.click()
         email_input = self.browser.find_element_by_xpath('//input[@type="text"]')
@@ -72,7 +72,7 @@ class TestConduit(object):
         time.sleep(2)
         cookie_panel = self.browser.find_elements_by_xpath(
             '//div[@class="cookie cookie__bar cookie__bar--bottom-left"]')
-        assert len(cookie_panel) == 0
+        assert len(cookie_panel) == 0  # a cookie-k elfogadását követően a panel eltűnik
 
     # TC004 - Adatok listázása
 
@@ -80,7 +80,8 @@ class TestConduit(object):
         login(self.browser, (sample_user["email"]), (sample_user["password"]))
         time.sleep(1)
         dolor_tag = WebDriverWait(self.browser, 3).until(EC.presence_of_element_located(
-            (By.XPATH, '//div[@class="sidebar"]/div[@class="tag-list"]/a[text()="dolor"]')))
+            (By.XPATH,
+             '//div[@class="sidebar"]/div[@class="tag-list"]/a[text()="dolor"]')))  # célzott várakozás, míg a keresett elem megjelenik az oldalon
         dolor_tag.click()
         time.sleep(2)
         article_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1')
@@ -92,6 +93,7 @@ class TestConduit(object):
         login(self.browser, (sample_user["email"]), (sample_user["password"]))
         time.sleep(1)
         page_list = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
+        # az oldalakon történő végiglapozás:
         for page in page_list:
             page.click()
             active_page = self.browser.find_element_by_xpath('//li[@class="page-item active"]')
@@ -103,7 +105,8 @@ class TestConduit(object):
     def test_new_article(self):
         login(self.browser, (sample_user["email"]), (sample_user["password"]))
         time.sleep(2)
-        new_article(self.browser, article["title"], article["about"], article["main"], article["tag"])
+        new_article(self.browser, article["title"], article["about"], article["main"],
+                    article["tag"])  # érdekes cikk file-ból történő beolvasása
         time.sleep(2)
         article_title = self.browser.find_element_by_xpath('//h1')
         assert article_title.text == article["title"]
@@ -144,7 +147,8 @@ class TestConduit(object):
         image_input = self.browser.find_element_by_xpath('//input[@placeholder="URL of profile picture"]')
         update_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         image_input.clear()
-        image_input.send_keys("https://cdn.pixabay.com/photo/2020/02/04/16/00/cheetah-4818603_960_720.jpg")
+        image_input.send_keys(
+            "https://cdn.pixabay.com/photo/2020/02/04/16/00/cheetah-4818603_960_720.jpg")  # jogtiszta kép felhasználása
         update_btn.click()
         time.sleep(2)
         result_message = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
@@ -161,21 +165,21 @@ class TestConduit(object):
         article_to_comment = articles_list[0]
         article_to_comment.click()
         time.sleep(2)
-
+        # törlésre szánt komment bevitele
         comment_field = self.browser.find_element_by_xpath('//textarea[@placeholder="Write a comment..."]')
         comment_field.send_keys("test comment")
         post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
         post_comment_btn.click()
         time.sleep(2)
-
+        # komment törlése
         comment_list = self.browser.find_elements_by_xpath('//p[@class="card-text"]')
         delete_btn = self.browser.find_elements_by_xpath('//i[@class="ion-trash-a"]')[0]
         delete_btn.click()
         time.sleep(2)
-
+        # aktuális kommentek kigyűjtése
         comment_list_updated = self.browser.find_elements_by_xpath('//p[@class="card-text"]')
         time.sleep(2)
-
+        # komment listák összehasonlítása
         assert len(comment_list) == len(comment_list_updated) + 1
 
     # TC010 - Adatok lementése felületről
